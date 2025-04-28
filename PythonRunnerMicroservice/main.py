@@ -19,6 +19,9 @@ app.add_middleware(
 
 @app.post("/python/run")
 async def run(request: ScriptRequest):
+    if request.script == "":
+        return {"error":"File is empty"}
+
     res = await run_code(request.script)
 
     return res
