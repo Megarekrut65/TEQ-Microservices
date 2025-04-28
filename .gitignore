@@ -162,3 +162,4 @@ cython_debug/
 /CppRunnerMicroservice/.idea
 /JavaRunnerMicroservice/.idea
 /PythonRunnerMicroservice/.idea
+PythonRunnerMicroservice/run
