@@ -18,8 +18,8 @@ async def run_code(code):
                     "--network", "none",
                     "--memory", "128m",
                     "--cpus", "0.5",
-                    "gcc:latest",
-                    "g++", "/app/script.cpp", "-o", "/app/script.out"
+                    "kost13/cpp-gtest:latest",
+                    "g++", "/app/script.cpp", "-lgtest", "-lgtest_main", "-lpthread","-o", "/app/script.out"
                 ],
                 capture_output=True,
                 text=True,
