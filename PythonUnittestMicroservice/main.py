@@ -2,8 +2,9 @@ import decouple
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
-from models import UnitTestRequest
+from models import ScriptRequest
 from test_runner import run_tests
+from utility import make_testing_script, make_test_case
 
 app = FastAPI()
 origins = [
@@ -19,13 +20,12 @@ app.add_middleware(
 )
 
 @app.post("/python/test")
-def run(request: UnitTestRequest):
-    if request.script == "":
-        return {"error":"Script file is empty"}
-
-    response, status = run_tests(request.script, request.test_script)
+def run(request: ScriptRequest):
+    test_script = make_test_case(request.function_structure, request.function_type, request.unittests)
+    response, status = run_tests(request.script, test_script)
 
     if status != 200:
         return HTTPException(status_code=status, detail=response)
 
+    response["testCase"] = test_script
     return response

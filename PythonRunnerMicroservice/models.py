@@ -4,5 +4,5 @@ class ScriptRequest(BaseModel):
     script: str = Field(..., alias="script")
 
     class Config:
-        validate_by_name = True
+        populate_by_name  = True
 
