@@ -49,7 +49,7 @@ def make_test_fun(index, f_name, f_type, unittest):
     f_call = f"{f_name}({unittest.in_test})"
 
     return f"""
-    def test_fun_{index}(self):
+    def test_fun_{unittest.prefix}{index}(self):
         {make_assert(f_call, f_type, unittest.out_test)}       
 """
 

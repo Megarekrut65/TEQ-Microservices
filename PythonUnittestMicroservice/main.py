@@ -21,7 +21,8 @@ app.add_middleware(
 
 @app.post("/python/test")
 def run(request: ScriptRequest):
-    test_script = make_test_case(request.function_structure, request.function_type, request.unittests)
+    test_script = make_test_case(request.function_structure, request.function_type,
+                                 request.unittests)
     response, status = run_tests(request.script, test_script)
 
     if status != 200:
