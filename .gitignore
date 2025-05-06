@@ -167,3 +167,5 @@ PythonRunnerMicroservice/run.md
 CppRunnerMicroservice/run.md
 /PythonUnittestMicroservice/.idea
 PythonUnittestMicroservice/run.md
+/Gateway/.idea
+SimilarityMicroservice/run.md
