@@ -20,6 +20,6 @@ app.add_middleware(
 
 @app.post("/uk/similarity")
 def calculate_similarity(request: SimilarityRequest):
-    similarity = get_similarity(request.text1, request.text2)
+    similarity = get_similarity(request.text1.lower(), request.text2.lower())
 
     return {"similarity": similarity}

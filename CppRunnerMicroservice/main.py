@@ -19,6 +19,7 @@ app.add_middleware(
 
 @app.post("/cpp/run")
 async def run(request: ScriptRequest):
+    print(request.script)
     res = await run_code(request.script)
-
+    print(res)
     return res
