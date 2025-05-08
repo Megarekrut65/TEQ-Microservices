@@ -5,9 +5,22 @@ from slowapi import Limiter
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 import httpx
-
+from starlette.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+origins = [
+    config("ORIGIN")
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["POST"],
+    allow_headers=["*"],
+)
+
 limiter = Limiter(key_func=get_remote_address)
 app.state.limiter = limiter
 
@@ -28,6 +41,8 @@ cpp_test_url = config("CPP_TEST")
 java_run_url = config("JAVA_RUN")
 java_test_url = config("JAVA_TEST")
 
+pl_url = config("PL_SIMILARITY")
+nl_url = config("NL_SIMILARITY")
 
 async def forward_request(service_url: str, request: Request):
     data = await request.body()
@@ -66,3 +81,13 @@ async def gateway_java_run(request: Request):
 @limiter.limit("5/second")
 async def gateway_java_test(request: Request):
     return await forward_request(java_test_url, request)
+
+@app.post("/pl/similarity/")
+@limiter.limit("5/second")
+async def gateway_java_test(request: Request):
+    return await forward_request(pl_url, request)
+
+@app.post("/nl/similarity/")
+@limiter.limit("5/second")
+async def gateway_java_test(request: Request):
+    return await forward_request(nl_url, request)
