@@ -1,0 +1,14 @@
+#include <string>
+#include <cmath>
+#include <gtest/gtest.h>
+#define ASSERT_FLOAT_EQ_CUSTOM(a, b) ASSERT_NEAR(a, b, 1e-6)
+
+    {% for test in tests %}
+        TEST(TestCase, TestFun_{{ test.prefix }}{{ loop.index }}) {
+        {{ test.assert_macro }}({{ test.call }}, {{ test.expected }});
+        }
+    {% endfor %}
+int main(int argc, char **argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+}

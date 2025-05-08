@@ -1,12 +1,13 @@
+import decouple
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from code_runner import run_code
-from models import ScriptRequest
+from app.code_runner import run_code
+from app.models import ScriptRequest
 
 app = FastAPI()
 origins = [
-    "http://localhost:8001",
+    decouple.config("ORIGIN")
 ]
 
 app.add_middleware(
@@ -19,7 +20,9 @@ app.add_middleware(
 
 @app.post("/cpp/run")
 async def run(request: ScriptRequest):
-    print(request.script)
+    if request.script == "":
+        return {"error":"File is empty"}
+
     res = await run_code(request.script)
-    print(res)
+
     return res
