@@ -2,8 +2,8 @@ import decouple
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
-from fine_tuned_similarity_model import get_similarity
-from models import SimilarityRequest
+from app.fine_tuned_similarity_model import get_similarity
+from app.models import SimilarityRequest
 
 app = FastAPI()
 origins = [
@@ -18,7 +18,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.post("/uk/similarity")
+@app.post("/nl/similarity")
 def calculate_similarity(request: SimilarityRequest):
     similarity = get_similarity(request.text1.lower(), request.text2.lower())
 
