@@ -1,0 +1,47 @@
+import org.junit.Test;
+import static org.junit.Assert.*;
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+import org.junit.runner.notification.Failure;
+
+public class Script {
+
+    public static void main(String[] args) {
+        Result result = JUnitCore.runClasses(Script.class);
+
+        System.out.println("{");
+        System.out.println("  \"passed\": " + (result.getFailureCount() == 0) + ",");
+        System.out.println("  \"failures\": [");
+
+        for (int i = 0; i < result.getFailures().size(); i++) {
+            Failure failure = result.getFailures().get(i);
+            String testName = failure.getDescription().getMethodName();
+            String reason = failure.getMessage();
+            System.out.print("    {\"testName\": \"" + testName + "\", \"reason\": \"" + escape(reason) + "\"}");
+            if (i < result.getFailures().size() - 1) {
+                System.out.println(",");
+            } else {
+                System.out.println();
+            }
+        }
+
+        System.out.println("  ],");
+        System.out.println("  \"totalTests\": " + result.getRunCount());
+        System.out.println("}");
+    }
+
+    private static String escape(String s) {
+        return s == null ? "" : s.replace("\"", "\\\"");
+    }
+
+    private void assertFloat(float expected, float actual) {
+        assertEquals(expected, actual, 0.000001f);
+    }
+
+{% for test in tests %}
+    @Test
+    public void test_{{ test.prefix }}_{{ loop.index }}() {
+        {{ test.assert_func }}({{ test.expected }}, {{ test.call }});
+    }
+{% endfor %}
+}
