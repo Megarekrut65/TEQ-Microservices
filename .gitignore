@@ -174,3 +174,6 @@ CppUnittestMicroservice/run.md
 JavaRunnerMicroservice/run.md
 /JavaUnittestMicroservice/.idea
 JavaUnittestMicroservice/run.md
+/ScriptSimilarityMicroservice/.idea
+ScriptSimilarityMicroservice/run.md
+Gateway/run.md
