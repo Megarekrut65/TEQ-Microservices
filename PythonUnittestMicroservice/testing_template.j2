@@ -1,0 +1,25 @@
+import unittest
+
+class TestCase(unittest.TestCase):
+{% for test in tests %}
+    def test_fun_{{ test.prefix }}{{ loop.index }}(self):
+        self.{{ test.assert_func }}({{ test.call }}, {{ test.expected }})
+{% endfor %}
+
+def unittest_wrapper():
+    suite = unittest.defaultTestLoader.loadTestsFromTestCase(TestCase)
+
+    import io
+    import json
+
+    fake_output = io.StringIO()
+    runner = unittest.TextTestRunner(stream=fake_output,verbosity=0)
+    result = runner.run(suite)
+    return json.dumps({
+        "passed": result.wasSuccessful(),
+        "failures": [(case.id(), err) for case, err in result.failures],
+        "errors": [(case.id(), err) for case, err in result.errors],
+        "total_tests": result.testsRun
+    })
+
+print(unittest_wrapper())
