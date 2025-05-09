@@ -19,8 +19,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.post("/java/test")
-def run(request: ScriptRequest):
+@app.post("/")
+def test(request: ScriptRequest):
     test_script = make_test_case(request.function_structure, request.function_type, request.unittests)
 
     try:

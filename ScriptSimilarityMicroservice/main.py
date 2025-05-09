@@ -18,7 +18,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.post("/pl/similarity")
+@app.post("/")
 def calculate_similarity(request: SimilarityRequest):
     similarity = get_similarity(request.code1.lower(), request.code2.lower())
 

@@ -18,7 +18,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.post("/java/run")
+@app.post("/")
 async def run(request: ScriptRequest):
     res = await run_code(request.script)
 

@@ -27,6 +27,8 @@ def save_to_temp_folder(tmp_dir_name, code):
 
 
 async def run_code(code):
+    os.makedirs("/tmp", exist_ok=True)
+
     with tempfile.TemporaryDirectory(dir="/tmp") as tmp_dir_name:
         save_to_temp_folder(tmp_dir_name, code)
 

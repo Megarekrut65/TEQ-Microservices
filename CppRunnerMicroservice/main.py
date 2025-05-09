@@ -18,7 +18,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.post("/cpp/run")
+@app.post("/")
 async def run(request: ScriptRequest):
     if request.script == "":
         return {"error":"File is empty"}
