@@ -11,12 +11,12 @@ def get_docker_commands(tmp_dir_name):
     """
     return [
         "docker", "run", "--rm",
-        "-v", f"{tmp_dir_name}:/app",
+        "-v", f"{tmp_dir_name}:/code",
         "--network", "none",
         "--memory", "128m",
         "--cpus", "0.5",
         "python:3.12-slim",
-        "python", "/app/script.py"
+        "python", "/code/script.py"
     ]
 
 def save_to_temp_folder(tmp_dir_name, code):
@@ -27,7 +27,7 @@ def save_to_temp_folder(tmp_dir_name, code):
 
 
 async def run_code(code):
-    with tempfile.TemporaryDirectory() as tmp_dir_name:
+    with tempfile.TemporaryDirectory(dir="/tmp") as tmp_dir_name:
         save_to_temp_folder(tmp_dir_name, code)
 
         try:

@@ -1,0 +1,95 @@
+version: "3.8"
+services:
+  python-runner:
+    build: ./PythonRunnerMicroservice
+    ports:
+      - "8006:8000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /tmp:/tmp
+    networks:
+      - backend
+    env_file:
+      - ./PythonRunnerMicroservice/.env
+
+  cpp-runner:
+    build: ./CppRunnerMicroservice
+    ports:
+      - "8007:8000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /tmp:/tmp
+    networks:
+      - backend
+    env_file:
+      - ./CppRunnerMicroservice/.env
+
+  java-runner:
+    build: ./JavaRunnerMicroservice
+    ports:
+      - "8008:8000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /tmp:/tmp
+    networks:
+      - backend
+    env_file:
+      - ./JavaRunnerMicroservice/.env
+
+  python-tester:
+    build: ./PythonUnittestMicroservice
+    ports:
+      - "8016:8000"
+    networks:
+      - backend
+    env_file:
+      - ./PythonUnittestMicroservice/.env
+
+  cpp-tester:
+    build: ./CppUnittestMicroservice
+    ports:
+      - "8017:8000"
+    networks:
+      - backend
+    env_file:
+      - ./CppUnittestMicroservice/.env
+
+  java-tester:
+    build: ./JavaUnittestMicroservice
+    ports:
+      - "8018:8000"
+    networks:
+      - backend
+    env_file:
+      - ./JavaUnittestMicroservice/.env
+
+  pl-similarity:
+    build: ./ScriptSimilarityMicroservice
+    ports:
+      - "8004:8000"
+    networks:
+      - backend
+    env_file:
+      - ./ScriptSimilarityMicroservice/.env
+
+  nl-similarity:
+    build: ./SimilarityMicroservice
+    ports:
+      - "8005:8000"
+    networks:
+      - backend
+    env_file:
+      - ./SimilarityMicroservice/.env
+
+  gateway:
+    build: ./Gateway
+    ports:
+      - "8080:8000"
+    networks:
+      - backend
+    env_file:
+      - ./Gateway/.env
+
+networks:
+  backend:
+    driver: bridge
