@@ -1,0 +1,10 @@
+{
+  "/python/run/": "http://localhost:8006",
+  "/python/test/": "http://localhost:8016",
+  "/cpp/run/": "http://localhost:8007",
+  "/cpp/test/": "http://localhost:8017",
+  "/java/run/": "http://localhost:8008",
+  "/java/test/": "http://localhost:8018",
+  "/pl/similarity/": "http://localhost:8004",
+  "/nl/similarity/": "http://localhost:8005"
+}
