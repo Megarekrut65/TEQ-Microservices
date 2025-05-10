@@ -16,6 +16,10 @@ This project provides a microservices architecture for executing and testing cod
 - **Gateway** – Central access point for all services (`localhost:8080`)
 
 ## Setup
+1. **Pull external images**:
+   ```bash
+   docker pull megarekrut65/java-junit
+   docker pull kost13/cpp-gtest
 
 1. **Build & start services**:
    ```bash
