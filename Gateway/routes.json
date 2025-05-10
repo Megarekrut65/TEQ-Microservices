@@ -1,10 +1,10 @@
 {
-  "/python/run/": "http://localhost:8006",
-  "/python/test/": "http://localhost:8016",
-  "/cpp/run/": "http://localhost:8007",
-  "/cpp/test/": "http://localhost:8017",
-  "/java/run/": "http://localhost:8008",
-  "/java/test/": "http://localhost:8018",
-  "/pl/similarity/": "http://localhost:8004",
-  "/nl/similarity/": "http://localhost:8005"
+  "/python/run/": "http://teq-microservices-python-runner-1:8000",
+  "/python/test/": "http://teq-microservices-python-tester-1:8000",
+  "/cpp/run/": "http://teq-microservices-cpp-runner-1:8000",
+  "/cpp/test/": "http://teq-microservices-cpp-tester-1:8000",
+  "/java/run/": "http://teq-microservices-java-runner-1:8000",
+  "/java/test/": "http://teq-microservices-java-tester-1:8000",
+  "/pl/similarity/": "http://teq-microservices-pl-similarity-1:8000",
+  "/nl/similarity/": "http://teq-microservices-nl-similarity-1:8000"
 }

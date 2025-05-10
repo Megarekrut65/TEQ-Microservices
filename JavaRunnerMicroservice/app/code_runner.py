@@ -1,8 +1,10 @@
 import subprocess
 import tempfile
 import os
+import uuid
 
-def get_docker_commands(tmp_dir_name, java_command):
+
+def get_docker_commands(tmp_dir_name, java_command, container_name):
     """
     Creates temporary docker container and runs python script
     Also add limits of memory and cpu
@@ -10,12 +12,12 @@ def get_docker_commands(tmp_dir_name, java_command):
     :return:
     """
     return [
-        "docker", "run", "--rm",
+        "docker", "run", "--rm", "--name", container_name,
         "-v", f"{tmp_dir_name}:/app",
         "--network", "none",
         "--memory", "128m",
         "--cpus", "0.5",
-        "java-junit-image",
+        "megarekrut65/java-junit",
         "sh", "-c",
         java_command
     ]
@@ -41,11 +43,14 @@ async def run_code(code):
     with tempfile.TemporaryDirectory(dir="/tmp") as tmp_dir_name:
         save_to_temp_folder(tmp_dir_name, code)
 
+        container_name = f"java-runner-{uuid.uuid4().hex[:12]}"
+
         try:
             result = subprocess.run(
-                get_docker_commands(tmp_dir_name, get_java_command(code)),
+                get_docker_commands(tmp_dir_name, get_java_command(code), container_name),
                 capture_output=True,
                 text=True,
+                timeout=10
             )
             if result.returncode != 0:
                 return {"output": "", "error": result.stderr}
@@ -56,5 +61,9 @@ async def run_code(code):
         except subprocess.TimeoutExpired:
             output = ""
             error = "Execution timed out."
+            subprocess.run(
+                ["docker", "rm", "-f", container_name],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL)
 
         return {"output": output, "error": error}
