@@ -18,12 +18,13 @@ This project provides a microservices architecture for executing and testing cod
 
 
 ## Setup
-1. **Pull external images**:
+1. Configure `.env` files for gateway and microservices
+2. **Pull external images**:
    ```bash
    docker pull python:3.12-slim
    docker pull megarekrut65/java-junit
    docker pull kost13/cpp-gtest
 
-2. **Build & start services**:
+3. **Build & start services**:
    ```bash
    docker-compose up --build
