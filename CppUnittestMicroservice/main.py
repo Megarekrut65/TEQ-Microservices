@@ -1,23 +1,10 @@
-import decouple
 from fastapi import FastAPI, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
 
 from app.models import ScriptRequest
 from app.test_runner import run_tests
 from app.utility import make_test_case
 
 app = FastAPI()
-origins = [
-    decouple.config("ORIGIN")
-]
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["POST"],
-    allow_headers=["*"],
-)
 
 @app.post("/")
 def test(request: ScriptRequest):

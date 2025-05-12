@@ -1,5 +1,5 @@
 {
-  "/python/run/": "http://teq-microservices-python-runner-1:8000",
+  "/python/run/": "http://localhost:8006",
   "/python/test/": "http://teq-microservices-python-tester-1:8000",
   "/cpp/run/": "http://teq-microservices-cpp-runner-1:8000",
   "/cpp/test/": "http://teq-microservices-cpp-tester-1:8000",

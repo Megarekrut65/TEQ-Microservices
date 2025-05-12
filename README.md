@@ -5,22 +5,25 @@ This project provides a microservices architecture for executing and testing cod
 
 ## Microservices Overview
 
-- **Python Runner** – Executes Python code (`localhost:8006`)
-- **C++ Runner** – Executes C++ code (`localhost:8007`)
-- **Java Runner** – Executes Java code (`localhost:8008`)
-- **Python Tester** – Runs Python unit tests - unittest lib (`localhost:8016`)
-- **C++ Tester** – Runs C++ unit tests - gtest lib (`localhost:8017`)
-- **Java Tester** – Runs Java unit tests - JUpiter lib (`localhost:8018`)
-- **PL Similarity** – Script similarity analysis for program languages (`localhost:8004`)
-- **NL Similarity** – Script similarity analysis for natural languages (`localhost:8005`)
-- **Gateway** – Central access point for all services (`localhost:8080`)
+- **Gateway** – Central access point for all services (`localhost:8800`)
+- **PL Similarity** – Script similarity analysis for program languages (`localhost:8801`)
+- **NL Similarity** – Script similarity analysis for natural languages (`localhost:8802`)
+- **Python Runner** – Executes Python code (`localhost:8803`)
+- **C++ Runner** – Executes C++ code (`localhost:8804`)
+- **Java Runner** – Executes Java code (`localhost:8805`)
+- **Python Tester** – Runs Python unit tests - unittest lib (`localhost:8806`)
+- **C++ Tester** – Runs C++ unit tests - gtest lib (`localhost:8807`)
+- **Java Tester** – Runs Java unit tests - JUnit lib (`localhost:8808`)
+
+
 
 ## Setup
 1. **Pull external images**:
    ```bash
+   docker pull python:3.12-slim
    docker pull megarekrut65/java-junit
    docker pull kost13/cpp-gtest
 
-1. **Build & start services**:
+2. **Build & start services**:
    ```bash
    docker-compose up --build
