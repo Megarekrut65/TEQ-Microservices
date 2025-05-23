@@ -10,7 +10,9 @@ ASSERT_MAP = {
 }
 
 def get_fun_name(f_struct):
-    match = re.search(r"\b(?:float|int|bool|string|double|auto|void)\s+(\w+)\s*\(", f_struct)
+    pattern = r"\b(?:(?:constexpr|inline|static|virtual|explicit|friend)\s+)*" \
+              r"(?:[\w:<>]+)\s+(\w+)\s*\("
+    match = re.search(pattern, f_struct)
     return match.group(1) if match else "unknown_func"
 
 def make_test_case(f_struct, f_type, unittests):

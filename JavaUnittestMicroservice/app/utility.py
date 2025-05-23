@@ -21,7 +21,16 @@ def make_testing_script(script, test_script):
 """
 
 def get_function_name(signature):
-    match = re.search(r"(?:public\s+)?(?:static\s+)?\w+\s+(\w+)\s*\(", signature)
+    pattern = (
+        r"(?:public\s+|private\s+|protected\s+)?"
+        r"(?:static\s+)?"
+        r"(?:final\s+)?"
+        r"(?:java\.util\.)?"
+        r"(?:int|long|float|double|boolean|char|byte|short|void|String|"
+        r"List|Map|Set|Queue)(?:<[^>]+>)?\s+"
+        r"(\w+)\s*\("
+    )
+    match = re.search(pattern, signature)
     return match.group(1) if match else "unknownFunction"
 
 def make_test_case(function_structure, function_type, unittests):
