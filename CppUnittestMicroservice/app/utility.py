@@ -6,6 +6,7 @@ ASSERT_MAP = {
     "integer": "ASSERT_EQ",
     "string": "ASSERT_EQ",
     "bool": "ASSERT_EQ",
+    "sequence": "ASSERT_EQ",
 }
 
 def get_fun_name(f_struct):

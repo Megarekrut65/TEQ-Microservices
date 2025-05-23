@@ -13,9 +13,10 @@ ASSERT_MAP = {
     "integer": "assertEqual",
     "string": "assertEqual",
     "bool": "assertEqual",
+    "sequence": "assertEqual",
 }
 
-env = Environment(loader=FileSystemLoader("."))  # Load current dir
+env = Environment(loader=FileSystemLoader("."))
 template = env.get_template("testing_template.j2")
 
 def get_function_name(function_code):

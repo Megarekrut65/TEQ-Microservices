@@ -7,6 +7,7 @@ ASSERT_MAP = {
     "integer": "assertEquals",
     "string": "assertEquals",
     "bool": "assertEquals",
+    "sequence": "assertEquals",
 }
 
 env = Environment(loader=FileSystemLoader("."))
